@@ -13,6 +13,7 @@ BuildRequires:	pkgconfig >= 0.8
 BuildRequires:	libxml2-devel
 BuildRequires:	png-devel
 BuildRequires:	jpeg-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 A generic SVG library.
