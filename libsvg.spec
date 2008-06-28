@@ -4,7 +4,7 @@
 Summary:	A generic SVG library
 Name:		libsvg
 Version:	0.1.4
-Release:	%mkrel 5
+Release:	%mkrel 6
 License:	LGPL
 Group:		System/Libraries
 URL:		http://cairographics.org/snapshots/
@@ -39,6 +39,8 @@ files to allow you to develop with libsvg.
 %setup -q
 
 %build
+export LIBS="`pkg-config --libs libxml-2.0` `pkg-config --libs libpng` -ljpeg -lz -lm"
+
 %configure2_5x
 %make
 
