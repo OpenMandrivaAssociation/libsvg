@@ -4,16 +4,16 @@
 Summary:	A generic SVG library
 Name:		libsvg
 Version:	0.1.4
-Release:	%mkrel 11
+Release:	12
 License:	LGPL
 Group:		System/Libraries
 URL:		http://cairographics.org/snapshots/
 Source:		http://cairographics.org/snapshots/%{name}-%{version}.tar.bz2
+Patch:		libsvg-0.1.4-libpng-1.5.patch
 BuildRequires:	pkgconfig >= 0.8
 BuildRequires:	libxml2-devel
 BuildRequires:	png-devel
 BuildRequires:	jpeg-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 A generic SVG library.
@@ -37,6 +37,7 @@ files to allow you to develop with libsvg.
 
 %prep
 %setup -q
+%patch -p1 -b .libpng15~
 
 %build
 export LIBS="`pkg-config --libs libxml-2.0` `pkg-config --libs libpng` -ljpeg -lz -lm"
@@ -45,9 +46,8 @@ export LIBS="`pkg-config --libs libxml-2.0` `pkg-config --libs libpng` -ljpeg -l
 %make
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-
-%makeinstall
+%makeinstall_std
+rm %{buildroot}%{_libdir}/*.la
 
 %clean
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
@@ -68,7 +68,6 @@ export LIBS="`pkg-config --libs libxml-2.0` `pkg-config --libs libpng` -ljpeg -l
 %files -n %{libname}-devel
 %defattr(644,root,root,755)
 %{_libdir}/*.so
-%attr(644,root,root) %{_libdir}/*.la
 %{_libdir}/*.a
 %{_includedir}/*
 %{_libdir}/pkgconfig/libsvg.pc
