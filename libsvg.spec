@@ -1,15 +1,16 @@
-%define major   1
+%define major 1
 %define libname %mklibname svg %{major}
+%define develname %mklibname svg -d
 
 Summary:	A generic SVG library
 Name:		libsvg
 Version:	0.1.4
-Release:	12
+Release:	13
 License:	LGPL
 Group:		System/Libraries
 URL:		http://cairographics.org/snapshots/
-Source:		http://cairographics.org/snapshots/%{name}-%{version}.tar.bz2
-Patch:		libsvg-0.1.4-libpng-1.5.patch
+Source0:	http://cairographics.org/snapshots/%{name}-%{version}.tar.bz2
+Patch0:		libsvg-0.1.4-libpng-1.5.patch
 BuildRequires:	pkgconfig >= 0.8
 BuildRequires:	libxml2-devel
 BuildRequires:	png-devel
@@ -18,58 +19,46 @@ BuildRequires:	jpeg-devel
 %description
 A generic SVG library.
 
-%package -n	%{libname}
+%package -n %{libname}
 Summary:	A generic SVG library
 Group:		System/Libraries
 
-%description -n	%{libname}
+%description -n %{libname}
 A generic SVG library.
 
-%package -n	%{libname}-devel
+%package -n %{develname}
 Summary:	Libraries and include files for developing with libsvg
 Group:		Development/C
 Requires:	%{libname} = %{version}
 Provides:	%{name}-devel = %{version}
+Provides:	lib%{name}-devel = %{version}
+Obsoletes:	%{mklibname svg 1}-devel < 0.1.4-13
 
-%description -n	%{libname}-devel
+%description -n	%{develname}
 This package provides the necessary development libraries and include
 files to allow you to develop with libsvg.
 
 %prep
 %setup -q
-%patch -p1 -b .libpng15~
+%apply_patches
 
 %build
 export LIBS="`pkg-config --libs libxml-2.0` `pkg-config --libs libpng` -ljpeg -lz -lm"
 
-%configure2_5x
+%configure2_5x \
+	--disable-static
+
 %make
 
 %install
 %makeinstall_std
 rm %{buildroot}%{_libdir}/*.la
 
-%clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
 %files -n %{libname}
-%defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog NEWS README TODO
-%attr(755,root,root) %{_libdir}/*.so.%{major}*
+%{_libdir}/*.so.%{major}*
 
-%files -n %{libname}-devel
-%defattr(644,root,root,755)
+%files -n %{develname}
+%doc AUTHORS COPYING ChangeLog NEWS README TODO
 %{_libdir}/*.so
-%{_libdir}/*.a
 %{_includedir}/*
 %{_libdir}/pkgconfig/libsvg.pc
-
-
