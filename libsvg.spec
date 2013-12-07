@@ -5,7 +5,7 @@
 Summary:	A generic SVG library
 Name:		libsvg
 Version:	0.1.4
-Release:	15
+Release:	16
 License:	LGPLv2
 Group:		System/Libraries
 Url:		http://cairographics.org/snapshots/
