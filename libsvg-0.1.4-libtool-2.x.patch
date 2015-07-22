@@ -1,0 +1,24 @@
+--- libsvg-0.1.4/configure.ac.omv~	2015-07-22 13:49:22.800363122 +0200
++++ libsvg-0.1.4/configure.ac	2015-07-22 13:49:36.002371874 +0200
+@@ -6,20 +6,7 @@ dnl ====================================
+ LIBSVG_VERSION=0.1.4
+ 
+ # libtool shared library version
+-
+-# Increment if the interface has additions, changes, removals.
+-LT_CURRENT=1
+-
+-# Increment any time the source changes; set to
+-# 0 if you increment CURRENT
+-LT_REVISION=0
+-
+-# Increment if any interfaces have been added; set to 0
+-# if any interfaces have been removed. removal has
+-# precedence over adding, so set to 0 if both happened.
+-LT_AGE=0
+-
+-VERSION_INFO="$LT_CURRENT:$LT_REVISION:$LT_AGE"
++VERSION_INFO="1:0:0"
+ AC_SUBST(VERSION_INFO)
+ 
+ dnl ===========================================================================
