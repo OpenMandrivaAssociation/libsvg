@@ -12,7 +12,7 @@ Url:		http://cairographics.org/snapshots/
 Source0:	http://cairographics.org/snapshots/%{name}-%{version}.tar.bz2
 Patch0:		libsvg-0.1.4-libpng-1.5.patch
 Patch1:		libsvg-0.1.4-libtool-2.x.patch
-BuildRequires:	pkgconfig(jpeg)
+BuildRequires:	pkgconfig(libjpeg)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(libxml-2.0)
 
@@ -37,9 +37,8 @@ This package provides the necessary development libraries and include
 files to allow you to develop with libsvg.
 
 %prep
-%setup -q
+%autosetup -p1
 mv configure.in configure.ac
-%apply_patches
 
 %build
 export LIBS="$(pkg-config --libs libxml-2.0` `pkg-config --libs libpng) -ljpeg -lz -lm"
