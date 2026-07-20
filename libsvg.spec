@@ -14,6 +14,7 @@ Source0:	http://cairographics.org/snapshots/%{name}-%{version}.tar.bz2
 #Patch1:		libsvg-0.1.4-libtool-2.x.patch
 Patch0: libsvg-0.1.4-libpng.patch
 Patch1: build.patch
+Patch2: libsvg-link.patch
 
 BuildRequires:	autoconf2.1
 BuildRequires:	automake
