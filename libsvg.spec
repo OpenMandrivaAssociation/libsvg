@@ -43,8 +43,8 @@ files to allow you to develop with libsvg.
 
 %prep
 %autosetup -p1
-mv configure.in configure.ac
-
+#mv configure.in configure.ac
+autoreconf -fiv
 %build
 export LIBS="$(pkg-config --libs libxml-2.0` `pkg-config --libs libpng) -ljpeg -lz -lm"
 
