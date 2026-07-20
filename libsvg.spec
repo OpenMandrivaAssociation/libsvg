@@ -1,4 +1,4 @@
-%define major 1
+%define major 2
 %define libname %mklibname svg %{major}
 %define devname %mklibname svg -d
 
@@ -10,9 +10,14 @@ License:	LGPLv2
 Group:		System/Libraries
 Url:		https://cairographics.org/snapshots/
 Source0:	http://cairographics.org/snapshots/%{name}-%{version}.tar.bz2
-Patch0:		libsvg-0.1.4-libpng-1.5.patch
-Patch1:		libsvg-0.1.4-libtool-2.x.patch
-BuildRequires:	autoconf
+# patches taken from Polish Linux Distro: https://git.pld-linux.org/?p=packages/libsvg.git;a=tree
+Patch0: libsvg-0.1.4-libpng.patch
+Patch1: build.patch
+Patch2: libsvg-link.patch
+              
+# use legacy autoreconf2.1 instead of current. Curent one cause build failed
+# configure.ac:11: error: undefined or overquoted macro: LT_CURRENT
+BuildRequires:	autoconf2.1
 BuildRequires:	automake
 BuildRequires:	libtool-base
 BuildRequires:	slibtool
@@ -43,11 +48,10 @@ files to allow you to develop with libsvg.
 
 %prep
 %autosetup -p1
-mv configure.in configure.ac
-
+#mv configure.in configure.ac
+/usr/bin/autoreconf-2.13
 %build
-export LIBS="$(pkg-config --libs libxml-2.0` `pkg-config --libs libpng) -ljpeg -lz -lm"
-
+export LIBS="$(pkg-config --libs libxml-2.0` `pkg-config --libs libpng) -ljpeg -lpng -lz -lm"
 %configure --disable-static
 %make_build
 
