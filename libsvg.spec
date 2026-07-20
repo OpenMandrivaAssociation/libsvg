@@ -1,4 +1,4 @@
-%define major 2
+%define major 1
 %define libname %mklibname svg %{major}
 %define devname %mklibname svg -d
 
