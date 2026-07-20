@@ -15,7 +15,7 @@ Source0:	http://cairographics.org/snapshots/%{name}-%{version}.tar.bz2
 Patch0: libsvg-0.1.4-libpng.patch
 Patch1: build.patch
 
-BuildRequires:	autoconf
+BuildRequires:	autoconf2.1
 BuildRequires:	automake
 BuildRequires:	libtool-base
 BuildRequires:	slibtool
@@ -47,7 +47,7 @@ files to allow you to develop with libsvg.
 %prep
 %autosetup -p1
 #mv configure.in configure.ac
-autoreconf -fiv
+/usr/bin/autoreconf-2.13
 %build
 export LIBS="$(pkg-config --libs libxml-2.0` `pkg-config --libs libpng) -ljpeg -lz -lm"
 
