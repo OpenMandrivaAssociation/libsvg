@@ -15,7 +15,9 @@ Source0:	http://cairographics.org/snapshots/%{name}-%{version}.tar.bz2
 Patch0: libsvg-0.1.4-libpng.patch
 Patch1: build.patch
 Patch2: libsvg-link.patch
-
+              
+# use legacy autoreconf2.1 instead of current. Curent one cause build failed
+# configure.ac:11: error: undefined or overquoted macro: LT_CURRENT
 BuildRequires:	autoconf2.1
 BuildRequires:	automake
 BuildRequires:	libtool-base
