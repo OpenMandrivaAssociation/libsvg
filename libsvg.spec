@@ -50,8 +50,7 @@ files to allow you to develop with libsvg.
 #mv configure.in configure.ac
 /usr/bin/autoreconf-2.13
 %build
-export LIBS="$(pkg-config --libs libxml-2.0` `pkg-config --libs libpng) -ljpeg -lz -lm"
-
+export LIBS="$(pkg-config --libs libxml-2.0` `pkg-config --libs libpng) -ljpeg -lpng -lz -lm"
 %configure --disable-static
 %make_build
 
