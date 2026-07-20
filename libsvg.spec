@@ -10,8 +10,11 @@ License:	LGPLv2
 Group:		System/Libraries
 Url:		https://cairographics.org/snapshots/
 Source0:	http://cairographics.org/snapshots/%{name}-%{version}.tar.bz2
-Patch0:		libsvg-0.1.4-libpng-1.5.patch
+#Patch0:		libsvg-0.1.4-libpng-1.5.patch
 #Patch1:		libsvg-0.1.4-libtool-2.x.patch
+Patch0: libsvg-0.1.4-libpng.patch
+Patch1: build.patch
+
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libtool-base
